@@ -40,6 +40,7 @@ function getRand(min, max) {
 
 client.stream('statuses/filter', { track: '@OreillyCover /orly' }, function (stream) {
     stream.on('data', function (tweet) {
+        console.log(JSON.stringify(tweet));
         var values = tweet.text.replace('@OreillyCover /orly', '').split(';'); // [title, topText, author]
         var query = querystring.stringify({
             title: values[0],
@@ -49,7 +50,7 @@ client.stream('statuses/filter', { track: '@OreillyCover /orly' }, function (str
             theme: getRand(0, 16)
         });
         var URL = 'https://orly-appstore.herokuapp.com/generate?' + query;
-        tweetOrlyCover(tweet.in_reply_to_screen_name, URL);
+        tweetOrlyCover(tweet.user.screen_name.in_reply_to_screen_name, URL);
     });
 
     stream.on('error', function (error) {
