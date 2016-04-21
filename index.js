@@ -50,7 +50,7 @@ client.stream('statuses/filter', { track: '@OreillyCover /orly' }, function (str
             theme: getRand(0, 16)
         });
         var URL = 'https://orly-appstore.herokuapp.com/generate?' + query;
-        tweetOrlyCover(tweet.user.screen_name.in_reply_to_screen_name, URL);
+        tweetOrlyCover(tweet.user.name, URL);
     });
 
     stream.on('error', function (error) {
